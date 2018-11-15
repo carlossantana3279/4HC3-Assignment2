@@ -11,7 +11,7 @@ body {
 }
 
 .info {
-    flex-grow: 1;
+    flex: 1 1 0;
 }
 
 #cellphone {
@@ -22,6 +22,8 @@ body {
 #ticket {
     border-right: 1px grey;
     border-right-style: solid;
+    font-family: monospace;
+    text-align: center;
 }
 
 #price {

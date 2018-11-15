@@ -32,7 +32,7 @@ function createWindow () {
   });
   rightWindow.setPosition(xy[0] + 800, xy[1]);
 
-  bottomWindow = new BrowserWindow({width: 800, height: 100, frame: false, parent: win});
+  bottomWindow = new BrowserWindow({width: 800, height: 225, frame: false, parent: win});
   bottomWindow.loadFile('bottom.html');
   bottomWindow.on('closed', () => {
     bottomWindow = null;
