@@ -4,9 +4,12 @@ const { app, BrowserWindow } = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+let rightWindow;
+let bottomWindow;
+
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({ width: 800, height: 600, resizable: false});
 
   // and load the index.html of the app.
   win.loadFile('index.html')
@@ -21,6 +24,20 @@ function createWindow () {
     // when you should delete the corresponding element.
     win = null
   })
+  let xy = win.getPosition();
+  rightWindow = new BrowserWindow({width: 100, height: 600, frame: false, parent: win});
+  rightWindow.loadFile('right.html');
+  rightWindow.on('closed', () => {
+    rightWindow = null; 
+  });
+  rightWindow.setPosition(xy[0] + 800, xy[1]);
+
+  bottomWindow = new BrowserWindow({width: 800, height: 100, frame: false, parent: win});
+  bottomWindow.loadFile('bottom.html');
+  bottomWindow.on('closed', () => {
+    bottomWindow = null;
+  });
+  bottomWindow.setPosition(xy[0], xy[1] + 600);
 }
 
 // This method will be called when Electron has finished
