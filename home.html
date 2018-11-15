@@ -7,7 +7,13 @@
     <body>
         <div id="homeContent">
             <button>Pay for a new parking spot</button>
-            <button>Get a refund</button>    
+            <button onclick="goToRefund()">Get a refund</button>    
         </div>
+        <script>
+            function goToRefund() {
+                console.log(parent.globalState);
+                location.href = "./refund1.html";
+            }
+        </script>
     </body>
 </html>
