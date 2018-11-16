@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <button onclick="goBackRefund1()">back</button>
+        <h1>This is your ticket refund</h1>
+        <table>
+            <th>
+                <tr>
+                    <td>Time Remaining</td>
+                    <td>Refund</td>
+                </tr>
+            </th>
+            <tr>
+                <td>30 min * $6/hour parking rate</td>
+                <td>$5.00</td>
+            </tr>
+            <tr>
+                <td>30 min * $1/hour charging rate</td>
+                <td>$2.50</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>$7.50</td>
+            </tr>
+        </table>
+        <button onclick="goBackHome()">Refund</button>
+        <script>
+            function goBackRefund1() {
+                location.href = "./refund1.html";
+            }
+            function goBackHome() {
+                location.href = "./home.html";
+            }
+        </script>
+    </body>
+</html>

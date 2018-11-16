@@ -1,9 +1,31 @@
 <html>
     <button onclick="goBackHome()">back</button>
-    <h1>START GETTING YOUR REFUND</h1>
+    <h1>Insert your ticket on the right to get started</h1>
     <script>
+    var ticketEvents = parent.globalState.events.insertTicket;
+    ticketEvents.push({
+        id: "refund1-ticket",
+        cb: function() {
+            cleanUpEvents();
+            location.href = "./refund2.html";
+        }
+    })
     function goBackHome() {
+        cleanUpEvents();
         location.href = "./home.html";
+    }
+
+    function cleanUpEvents() {
+        var refundEvents = [];
+        for (var i = 0; i < ticketEvents.length; i++) {
+            if (ticketEvents[i].id == "refund1-ticket") {
+                refundEvents.push(i);
+            }
+        }
+        for (var i = 0; i < refundEvents.length; i++) {
+            // removes any existing refund events with my id
+            ticketEvents.splice(refundEvents[i], 1);
+        }
     }
     </script>   
 </html>

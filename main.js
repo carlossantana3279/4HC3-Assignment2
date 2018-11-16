@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -38,6 +39,22 @@ function createWindow () {
     bottomWindow = null;
   });
   bottomWindow.setPosition(xy[0], xy[1] + 600);
+
+  ipcMain.on('insert-ticket', (event, payload) => {
+    win.webContents.send('insert-ticket', payload);
+  });
+
+  ipcMain.on('tap-credit', (event, payload) => {
+    win.webContents.send('tap-credit', payload);
+  });
+
+  ipcMain.on('insert-credit', (event, payload) => {
+    win.webContents.send('insert-credit', payload);
+  });
+
+  ipcMain.on('insert-coins', (event, payload) => {
+    win.webContents.send('insert-coins', payload);
+  });
 }
 
 // This method will be called when Electron has finished

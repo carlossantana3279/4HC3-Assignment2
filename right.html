@@ -8,10 +8,30 @@
   </head>
   <body>
     <div id="content">
-        <button>Insert Ticket</button>
-        <button>Tap Credit Card</button>
-        <button>Insert Credit Card</button>
-        <button>Insert Coins</button>
+        <button id="ticketButton" onclick="ticketOnClick()">Insert Ticket</button>
+        <button id="tapButton" onclick="tapOnClick()">Tap Credit Card</button>
+        <button id="ccButton" onclick="creditOnClick()">Insert Credit Card</button>
+        <button id="coinsButton" onclick="coinsOnClick()">Insert Coins</button>
     </div>
+    <script>
+      const ipc = require('electron').ipcRenderer;
+
+      function ticketOnClick() {
+        ipc.send('insert-ticket', {"wasClicked": true});
+        console.log("sent the event");
+      }
+
+      function tapOnClick() {
+        ipc.send('tap-credit', {"tapped": true});
+      }
+
+      function creditOnClick() {
+        ipc.send('insert-credit', {"inserted": true});
+      }
+
+      function coinsOnClick() {
+        ipc.send('insert-coins', {"inserted":true});
+      }
+    </script>
   </body>
 </html>
