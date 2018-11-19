@@ -11,6 +11,7 @@ let bottomWindow;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600, resizable: false});
+  win.setResizable(false);
 
   // and load the index.html of the app.
   win.loadFile('index.html')
@@ -32,6 +33,7 @@ function createWindow () {
     rightWindow = null; 
   });
   rightWindow.setPosition(xy[0] + 800, xy[1]);
+  rightWindow.setResizable(false);
 
   bottomWindow = new BrowserWindow({width: 800, height: 225, frame: false, parent: win});
   bottomWindow.loadFile('bottom.html');
@@ -39,6 +41,7 @@ function createWindow () {
     bottomWindow = null;
   });
   bottomWindow.setPosition(xy[0], xy[1] + 600);
+  bottomWindow.setResizable(false);
 
   ipcMain.on('insert-ticket', (event, payload) => {
     win.webContents.send('insert-ticket', payload);
