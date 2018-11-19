@@ -55,6 +55,18 @@ function createWindow () {
   ipcMain.on('insert-coins', (event, payload) => {
     win.webContents.send('insert-coins', payload);
   });
+
+  ipcMain.on('send-text', (event, payload) => {
+    bottomWindow.webContents.send('send-text', payload);
+  });
+
+  ipcMain.on('print-ticket', (event, payload) => {
+    bottomWindow.webContents.send('print-ticket', payload);
+  });
+
+  ipcMain.on('output-change', (event, payload) => {
+    bottomWindow.webContents.send('output-change', payload);
+  });
 }
 
 // This method will be called when Electron has finished

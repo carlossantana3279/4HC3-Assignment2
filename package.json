@@ -19,5 +19,8 @@
   "homepage": "https://github.com/carlossantana3279/4HC3-Assignment2#readme",
   "devDependencies": {
     "electron": "^3.0.9"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.3"
   }
 }
