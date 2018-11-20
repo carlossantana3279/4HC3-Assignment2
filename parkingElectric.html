@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         <!--<link rel="stylesheet" href="home.css">-->
+    </head>
+    <body>
+        <button>back</button>  
+        <div id="parkingTimeContent">
+              
+            <table>
+                <tr>
+                    <th>Spot</th>
+                    <th>Time</th>
+                    <th>Electric Car Charging</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>1:15 min</td>
+                    <td> <input type="checkbox"></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>1:15 min</td>
+                    <td> <input type="checkbox"></td>
+                </tr>
+            </table>
+            
+
+            <button onclick="goToElectricCarSelect()">Next</button>
+            <h6>Price: $10.00</h6>
+        </div>
+
+        <script>
+            function goToElectricCarSelect() {
+                console.log(parent.globalState);
+                location.href = "./parkingCost.html";
+            }
+        </script>
+    </body>
+</html>
