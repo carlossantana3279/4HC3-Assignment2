@@ -5,7 +5,7 @@
          <!--<link rel="stylesheet" href="home.css">-->
     </head>
     <body>
-        <button>back</button>  
+        <button onclick="goBackHome()">back</button>  
         <div id="parkingTimeContent">
             <h3 id="currentTime">Current Time: </h3>
             <script>
@@ -51,12 +51,16 @@
             <h6 id="expiryDate">Parking Expiry: 00:00</h6>
             <button onclick="goToParkingSpotSelection()">Next</button>
 
-            <h6 id="price">Price: $10.00</h6>
+            <h6 id="price">Price: $0.00</h6>
 
         </div>
 
         <script>
-
+            function initialPrice() {
+                var price = document.getElementById("price");
+                price.innerHTML = "Price : $" + parent.globalState.cost; 
+            }
+            initialPrice();
 
             function updatePriceAndTime(){
                 var hours = document.getElementById("hours");
@@ -90,9 +94,25 @@
             }
 
             function goToParkingSpotSelection() {
+                var price = document.getElementById("price").innerHTML;
+                price = price.replace("$",""); 
+                price = price.replace("Price:", "");
+                price = price.replace(" ", "");
+                parent.globalState.cost = price;
+
                 console.log(parent.globalState);
                 location.href = "./parkingSpot.html";
             }
+
+            function goBackHome() {
+                cleanUp();
+                location.href = "./home.html";
+            }
+            
+            function cleanUp(){
+                parent.globalState.cost = 0;
+            }
+
         </script>
     </body>
 </html>

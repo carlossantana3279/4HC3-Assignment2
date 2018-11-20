@@ -9,8 +9,9 @@ var globalState = {
     ],
     tapCredit: [],
     insertCredit: [],
-    insertCoins: []
-  }
+    insertCoins: [],
+  },
+  cost: 0
 };
 
 // renderer process

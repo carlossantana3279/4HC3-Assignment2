@@ -5,7 +5,7 @@
          <!--<link rel="stylesheet" href="home.css">-->
     </head>
     <body>
-        <button>back</button>  
+        <button onclick="goBackToParkingSpot()">back</button>  
         <div id="parkingTimeContent">
               
             <table>
@@ -37,6 +37,15 @@
             function goToElectricCarSelect() {
                 console.log(parent.globalState);
                 location.href = "./parkingCost.html";
+            }
+
+            function goBackToParkingSpot(){
+                cleanUp();
+                location.href = "./parkingSpot.html";
+            }
+
+            function cleanUp(){
+
             }
         </script>
     </body>
