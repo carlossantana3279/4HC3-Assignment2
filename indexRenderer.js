@@ -16,8 +16,10 @@ var globalState = {
   hours: 0,
   minutes: 0,
   spots: 1,
-  electricSpots: []
-};
+  electricSpots: [],
+  paymentMethod: ""
+
+}
 
 // renderer process
 var ipcRenderer = require('electron').ipcRenderer;
