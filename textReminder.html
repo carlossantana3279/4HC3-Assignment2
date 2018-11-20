@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="textReminder.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="">
+            <button onclick="goBackHome()">back</button>
+            <h1>Would you like a text reminder 10 minutes before your time runs out?</h1>
+            <button onclick="showPhoneNumberInput()">Yes</button>
+            <button onclick="goToPaymentMethod()">No</button>    
+        </div>
+        <div id="phoneNumberInput">
+            <input id="areaCode" type="text" maxlength="3" minlength="3" pattern="[0-9]{3}">
+            <span>-</span>
+            <input id="middle" type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" />
+            <span>-</span>
+            <input id="last" type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" />
+        </div>
+        <div id="continueToPay">
+            <button onclick="validatePhoneInput()">Continue To Pay</button>
+        </div>
+        <script>
+            function goToPaymentMethod() {
+                console.log(parent.globalState);
+                location.href = "./paymentMethod.html";
+            }
+            function showPhoneNumberInput() {
+                document.getElementById("phoneNumberInput").style.display = "block";
+                document.getElementById("continueToPay").style.display = "block";
+            }
+            function goBackHome() {
+                location.href = "./home.html";
+            }
+
+            function validatePhoneInput(){
+                //validate inputs
+                
+
+                location.href = "./paymentMethod.html";
+            }
+
+            $('#areaCode').keyup(function() {
+                if(this.value.length >= $(this).attr('maxlength'))
+                {
+                    $('#middle').focus();
+                }
+            });
+
+            $('#middle').keyup(function() {
+                if(this.value.length >= $(this).attr('maxlength'))
+                {
+                    $('#last').focus();
+                }
+            });
+
+            $('#middle').on("keydown", function(event){
+                if(event.keyCode == 8 && $('#middle').val().length == 0){
+                    $('#areaCode').focus();
+                }
+            });
+
+            $('#last').on("keydown", function(event){
+                if(event.keyCode == 8 && $('#last').val().length == 0){
+                    $('#middle').focus();
+                }
+            });
+        </script>
+    </body>
+</html>

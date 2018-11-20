@@ -1,0 +1,11 @@
+#phoneNumberInput, #continueToPay {
+    display: none;
+}
+
+input:invalid {
+    border: 1px solid red !important; 
+}
+
+input:valid {
+    border: 1px solid green !important; 
+}
