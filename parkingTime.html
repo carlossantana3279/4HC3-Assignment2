@@ -30,22 +30,22 @@
             <h6>Time: </h6>
             <label>Hours</label>
             <select id="hours" name="hours" onchange="updatePriceAndTime()">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
             </select>
             <Label>Minutes</Label>
             <select id="minutes" name="minutes" onchange="updatePriceAndTime()">
-                    <option>0</option>
-                    <option>15</option>
-                    <option>30</option>
-                    <option>45</option>
+                    <option value="0">0</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
             </select>  
 
             <h6 id="expiryDate">Parking Expiry: 00:00</h6>
@@ -56,11 +56,18 @@
         </div>
 
         <script>
-            function initialPrice() {
+            function initialize(){
                 var price = document.getElementById("price");
+                var hours = document.getElementById("hours");
+                var minutes = document.getElementById("minutes");
+
+
                 price.innerHTML = "Price : $" + parent.globalState.cost; 
+                hours.value= parent.globalState.hours;
+                minutes.value= parent.globalState.minutes;
+                updatePriceAndTime();
             }
-            initialPrice();
+            initialize();
 
             function updatePriceAndTime(){
                 var hours = document.getElementById("hours");
@@ -95,22 +102,32 @@
 
             function goToParkingSpotSelection() {
                 var price = document.getElementById("price").innerHTML;
+                var ddHours = document.getElementById("hours");
+                var hours = ddHours.options[ddHours.selectedIndex].value;
+                var ddMinutes = document.getElementById("minutes");
+                var minutes = ddMinutes.options[ddMinutes.selectedIndex].value;
+
                 price = price.replace("$",""); 
                 price = price.replace("Price:", "");
                 price = price.replace(" ", "");
                 parent.globalState.cost = price;
-
+                parent.globalState.singleParkingSpotCost = price;
+                parent.globalState.hours = hours;
+                parent.globalState.minutes = minutes;
                 console.log(parent.globalState);
                 location.href = "./parkingSpot.html";
             }
 
             function goBackHome() {
                 cleanUp();
+                console.log(parent.globalState);
                 location.href = "./home.html";
             }
             
             function cleanUp(){
                 parent.globalState.cost = 0;
+                parent.globalState.hours = 0;
+                parent.globalState.minutes = 0;
             }
 
         </script>

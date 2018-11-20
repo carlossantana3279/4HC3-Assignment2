@@ -8,33 +8,79 @@
         <button onclick="goBackToParkingSpot()">back</button>  
         <div id="parkingTimeContent">
               
-            <table>
-                <tr>
-                    <th>Spot</th>
-                    <th>Time</th>
-                    <th>Electric Car Charging</th>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td>1:15 min</td>
-                    <td> <input type="checkbox"></td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>1:15 min</td>
-                    <td> <input type="checkbox"></td>
-                </tr>
-            </table>
+            <form class="demo" id="demo"> 
+                <table id="ElectricTable">
+                    <tr>
+                        <th>Spot</th>
+                        <th>Time</th>
+                        <th>Electric Car Charging</th>
+                    </tr>
+                </table>
+            </form>
             
 
             <button onclick="goToElectricCarSelect()">Next</button>
-            <h6>Price: $10.00</h6>
+            <h6 id="electricCost">Price: $10.00</h6>
         </div>
 
         <script>
+            function initialize(){
+                var price = document.getElementById("electricCost");
+                price.innerHTML = "Price: $" + parent.globalState.cost;
+            }
+            initialize();
+
+            function updateTable(){
+                var table = document.getElementById("ElectricTable");
+                var i = 0;
+                for (i=1; i <= parent.globalState.spots; i++){
+                    var row = table.insertRow(i);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+
+                    cell1.innerHTML = i;
+                    cell2.innerHTML = parent.globalState.hours + " hours, " + parent.globalState.minutes + " minutes";
+                    cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()'> ";
+  
+                    if(parent.globalState.electricSpots[i-1] === 1){
+                        cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()' checked>"
+                    }
+                }
+            }
+            updateTable();
+
+            function getSum(total, num){
+                return total+num;
+            }
+
+            function updatePrice(){
+                var electric = document.forms['demo'].elements['electric'];
+                var price = document.getElementById("electricCost");
+                var elec = [];
+                var count =0 ;
+                var elprice = 0;
+                var i = 0;
+                var localCost = 0;
+                localCost = parent.globalState.singleParkingSpotCost * parent.globalState.spots;
+
+                for (i=0; i < parent.globalState.spots; i++){
+                    elec[i] = (electric[i].checked ? 1 : 0);
+                    count = count + elec[i];
+                }
+                elprice = parent.globalState.hours * count;
+                elprice = Math.round((elprice + parent.globalState.minutes*0.01666*count) * 100 ) / 100;
+                price.innerHTML = "Price: $" + (+localCost + +elprice);
+                
+                parent.globalState.electricSpots = elec;   
+            }
+            updatePrice();
+
             function goToElectricCarSelect() {
+                var price = document.getElementById("electricCost").innerHTML;
+                price = price.replace("Price: $","");
+                parent.globalState.cost = price;
+
                 console.log(parent.globalState);
                 location.href = "./parkingCost.html";
             }

@@ -8,43 +8,62 @@
         <button onclick="goBackToParkingElectric()">back</button>  
         <div id="parkingTimeContent">
               
-            <table>
+            <table id="costTable">
                 <tr>
                     <th>Spot</th>
                     <th>Time</th>
                     <th>Charging</th>
                     <th>Cost</th>
                 </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td>1:15 min</td>
-                    <td> <input type="checkbox"></td>
-                    <td>$10.50</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>1:15 min</td>
-                    <td> <input type="checkbox"></td>
-                    <td>$10.50</td>
-                </tr>
-                
-                <tr>
-                    <td>charging fee</td>
-                    <td></td>
-                    <td></td>
-                    <td> $5.00</td>
-                </tr>
             </table>
             
-            <h1>Total: $26.00</h1>
+            <h1 id="totalCost">Total: $26.00</h1>
 
             <button onclick="goToPhoneNumber()">Pay</button>
-            <h6>Price: $10.00</h6>
         </div>
 
         <script>
+            function initialize(){
+                var price = document.getElementById("totalCost");
+                price.innerHTML = "Total: $" + parent.globalState.cost;
+            }
+            initialize();
+
+            function updateTable(){
+                var table = document.getElementById("costTable");
+                var i = 0;
+                var rowCounter = 1;
+                for (i=1; i <= parent.globalState.spots; i++){
+                    var row = table.insertRow(rowCounter);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+
+                    cell1.innerHTML = i;
+                    cell2.innerHTML = parent.globalState.hours + ":" + parent.globalState.minutes;
+                    if(parent.globalState.electricSpots[i-1] === 1){
+                        cell3.innerHTML = "Yes";
+                        rowCounter +=1;
+                        var row2 = table.insertRow(rowCounter);
+                        var c1 = row2.insertCell(0);
+                        var c2 = row2.insertCell(1);
+                        var c3 = row2.insertCell(2);
+                        var c4 = row2.insertCell(3);
+                        
+                        c2.innerHTML = "Charging Fee: ";
+                        c3.innerHTML = parent.globalState.hours +":" + parent.globalState.minutes + "x $1";
+                        c4.innerHTML = "$" + Math.round((parent.globalState.hours + parent.globalState.minutes*0.01666) * 100 ) / 100;
+                    }else{
+                        cell3.innerHTML = "No";
+                    }
+
+                    cell4.innerHTML = "$"+parent.globalState.singleParkingSpotCost;
+                    rowCounter +=1;
+                }
+            }
+            updateTable();
+
             function goToPhoneNumber() {
                 console.log(parent.globalState);
                 location.href = "./textReminder.html";

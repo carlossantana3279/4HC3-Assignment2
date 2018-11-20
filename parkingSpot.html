@@ -10,12 +10,12 @@
               
             <h1>How many spots would you like to purchase?</h1>
             <Label>Spots</Label>
-            <select name="spots">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+            <select id="ddSpots" name="spots" onchange="updateCost()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
             </select>  
 
             <button onclick="goToElectricCarSelect()">Next</button>
@@ -23,19 +23,43 @@
         </div>
 
         <script>
-            function initialPrice() {
+            function initialize() {
                 var price = document.getElementById("parkingSpotPrice");
-                price.innerHTML = "Price : $" + parent.globalState.cost; 
+                var spots = document.getElementById("ddSpots");
+
+                spots.value = parent.globalState.spots; 
+                price.innerHTML = "Price: $" + parent.globalState.singleParkingSpotCost*spots.value;
             }
-            initialPrice();
+            initialize();
+
+            function updateCost(){
+                var ddSpots = document.getElementById("ddSpots");
+                var spots = ddSpots.options[ddSpots.selectedIndex].value;
+                var oldPrice = document.getElementById("parkingSpotPrice");
+                var newPrice = parent.globalState.singleParkingSpotCost * spots;
+                oldPrice.innerHTML = "Price: $" + newPrice; 
+
+                parent.globalState.spots = spots;
+                parent.globalState.cost = newPrice;
+            }
 
             function goToElectricCarSelect() {
+                var ddSpots = document.getElementById("ddSpots");
+                var spots = ddSpots.options[ddSpots.selectedIndex].value;
+                var price = document.getElementById("parkingSpotPrice").innerHTML;
+                price = price.replace("Price: $","");
+
+                parent.globalState.spots = spots;
+                parent.globalState.cost = price;
                 console.log(parent.globalState);
+                
+
                 location.href = "./parkingElectric.html";
             }
 
             function goBackToParkingTime(){
                 cleanUp();
+                console.log(parent.globalState);
                 location.href = "./parkingTime.html";
             }
 

@@ -11,7 +11,12 @@ var globalState = {
     insertCredit: [],
     insertCoins: [],
   },
-  cost: 0
+  cost: 0,
+  singleParkingSpotCost: 0,
+  hours: 0,
+  minutes: 0,
+  spots: 1,
+  electricSpots: []
 };
 
 // renderer process
