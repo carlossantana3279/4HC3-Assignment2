@@ -43,8 +43,12 @@
                     cell2.innerHTML = parent.globalState.hours + " hours, " + parent.globalState.minutes + " minutes";
                     cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()'> ";
   
-                    if(parent.globalState.electricSpots[i-1] === 1){
-                        cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()' checked>"
+                    if(parent.globalState.spots == 1){
+                        if(parent.globalState.electricSpots == 1){
+                            cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()' checked>" ;
+                        }
+                    }else if(parent.globalState.electricSpots[i-1] === 1){
+                        cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()' checked>" ;
                     }
                 }
             }
@@ -71,7 +75,9 @@
                     }
                 }else{
                     elec = electric.checked;
-                    count = 1;
+                    if(electric.checked){
+                        count = 1;
+                    }
                 }
                 elprice = parent.globalState.hours * count;
                 elprice = Math.round((elprice + parent.globalState.minutes*0.01666*count) * 100 ) / 100;
