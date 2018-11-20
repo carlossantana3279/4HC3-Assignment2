@@ -13,7 +13,7 @@
                Parking Meter 
             </div>
             <br>
-            <span class="bubble">
+            <span class="bubble" id="phone-message">
                 Your time is up in 15 min
             </span>
         </div>
@@ -37,5 +37,20 @@
             5¢
         </div>
     </div>
+    <script>
+        const ipc = require('electron').ipcRenderer;
+  
+        ipc.on('send-text', function(event, store) {
+            document.getElementById('phone-message').innerText = store;
+        });
+
+        ipc.on('print-ticket', function(event, store) {
+            document.getElementById('ticket').innerHTML = store;
+        })
+
+        ipc.on('output-change', function(event, store) {
+            document.getElementById('change').innerText = store;
+        });
+      </script>
   </body>
 </html>

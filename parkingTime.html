@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         <!--<link rel="stylesheet" href="home.css">-->
+    </head>
+    <body>
+        <button>back</button>  
+        <div id="parkingTimeContent">
+            <h3 id="currentTime">Current Time: </h3>
+            <script>
+                function updateCurrentTime(){
+                    var currentTime = document.getElementById("currentTime");
+                    var d = new Date();
+
+                    
+                    if(d.getHours() < 10 & d.getMinutes() < 10){
+                        currentTime.innerHTML = "Time: "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                    }else if (d.getHours() < 10){
+                        currentTime.innerHTML = "Time: "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                    }else if (d.getMinutes() < 10){ 
+                        currentTime.innerHTML = "Time: " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                    }else{
+                        currentTime.innerHTML = "Time: " + d.getHours() + ":" + d.getMinutes();
+                    }
+                }    
+                updateCurrentTime();
+            </script>
+            <h1>How much time would you like to purchase?</h1>
+            <h6>Time: </h6>
+            <label>Hours</label>
+            <select id="hours" name="hours" onchange="updatePriceAndTime()">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+            </select>
+            <Label>Minutes</Label>
+            <select id="minutes" name="minutes" onchange="updatePriceAndTime()">
+                    <option>0</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
+            </select>  
+
+            <h6 id="expiryDate">Parking Expiry: 00:00</h6>
+            <button onclick="goToParkingSpotSelection()">Next</button>
+
+            <h6 id="price">Price: $10.00</h6>
+
+        </div>
+
+        <script>
+
+
+            function updatePriceAndTime(){
+                var hours = document.getElementById("hours");
+                var minutes = document.getElementById("minutes");
+                var price = document.getElementById("price");
+                var currentTime = document.getElementById("currentTime");
+                var expiry = document.getElementById("expiryDate");
+                var myPrice;
+                var myMinutes;
+                
+                updateCurrentTime();
+
+                var d = new Date();
+
+                myPrice = hours.value * 6;
+                myPrice = myPrice + (minutes.value * 0.1);
+
+                price.innerHTML = "Price: $" + myPrice;
+                myMinutes = +minutes.value + (+hours.value*60);
+                var d2 = new Date(d.getTime() + (myMinutes)*60000);
+                if(d2.getHours() < 10 & d2.getMinutes() < 10){
+                    expiry.innerHTML = "Parking Expiry: " + +"0"+d2.getHours() + ":" + +"0"+ d2.getMinutes();
+                }else if (d2.getHours() < 10){
+                    expiry.innerHTML = "Parking Expiry: " + +"0"+d2.getHours() + ":"+ d2.getMinutes();
+                }else if (d2.getMinutes() < 10){
+                    expiry.innerHTML = "Parking Expiry: " + d2.getHours() + ":" + +"0"+d2.getMinutes();    
+                }else{
+                    expiry.innerHTML = "Parking Expiry: "+d2.getHours() + ":"+ d2.getMinutes();
+                }
+
+            }
+
+            function goToParkingSpotSelection() {
+                console.log(parent.globalState);
+                location.href = "./parkingSpot.html";
+            }
+        </script>
+    </body>
+</html>

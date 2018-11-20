@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         <!--<link rel="stylesheet" href="home.css">-->
+    </head>
+    <body>
+        <button>back</button>  
+        <div id="parkingTimeContent">
+              
+            <table>
+                <tr>
+                    <th>Spot</th>
+                    <th>Time</th>
+                    <th>Charging</th>
+                    <th>Cost</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>1:15 min</td>
+                    <td> <input type="checkbox"></td>
+                    <td>$10.50</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>1:15 min</td>
+                    <td> <input type="checkbox"></td>
+                    <td>$10.50</td>
+                </tr>
+                
+                <tr>
+                    <td>charging fee</td>
+                    <td></td>
+                    <td></td>
+                    <td> $5.00</td>
+                </tr>
+            </table>
+            
+            <h1>Total: $26.00</h1>
+
+            <button onclick="goToPhoneNumber()">Pay</button>
+            <h6>Price: $10.00</h6>
+        </div>
+
+        <script>
+            function goToPhoneNumber() {
+                console.log(parent.globalState);
+                //location.href = "./textReminder.html";
+            }
+        </script>
+    </body>
+</html>
