@@ -9,11 +9,15 @@
         <div id="">
             <button onclick="goBackToTextReminder()">back</button>
             <h1>Select a payment option</h1>
-            <h3>Total: $23</h3>
+            <h3>Total: $<span id="cost"></span></h3>
             <button onclick="cashSelected()">Cash</button>
             <button onclick="creditSelected()">Debit/Credit</button>    
         </div>        
         <script>
+            $(document).ready(function(){
+                $("#cost").html(parent.globalState.cost);
+            });
+
             function goToPay() {
                 console.log(parent.globalState);
                 location.href = "./paying.html";

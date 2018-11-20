@@ -18,7 +18,6 @@ var globalState = {
   spots: 1,
   electricSpots: [],
   paymentMethod: ""
-
 }
 
 // renderer process
