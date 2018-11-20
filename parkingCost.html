@@ -5,7 +5,7 @@
          <!--<link rel="stylesheet" href="home.css">-->
     </head>
     <body>
-        <button>back</button>  
+        <button onclick="goBackToParkingElectric()">back</button>  
         <div id="parkingTimeContent">
               
             <table>
@@ -48,6 +48,18 @@
             function goToPhoneNumber() {
                 console.log(parent.globalState);
                 location.href = "./textReminder.html";
+<<<<<<< HEAD
+=======
+            }
+
+            function goBackToParkingElectric(){
+                cleanUp();
+                location.href = "./parkingElectric.html";
+            }
+
+            function cleanUp(){
+
+>>>>>>> 8a1f1a81924fe6477832258903f8a82755b4d0ff
             }
         </script>
     </body>

@@ -5,13 +5,12 @@
          <!--<link rel="stylesheet" href="home.css">-->
     </head>
     <body>
-        <button>back</button>  
+        <button onclick="goBackToParkingTime()">back</button>  
         <div id="parkingTimeContent">
               
             <h1>How many spots would you like to purchase?</h1>
             <Label>Spots</Label>
             <select name="spots">
-                    <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -20,13 +19,28 @@
             </select>  
 
             <button onclick="goToElectricCarSelect()">Next</button>
-            <h6>Price: $10.00</h6>
+            <h6 id="parkingSpotPrice">Price: $0.00</h6>
         </div>
 
         <script>
+            function initialPrice() {
+                var price = document.getElementById("parkingSpotPrice");
+                price.innerHTML = "Price : $" + parent.globalState.cost; 
+            }
+            initialPrice();
+
             function goToElectricCarSelect() {
                 console.log(parent.globalState);
                 location.href = "./parkingElectric.html";
+            }
+
+            function goBackToParkingTime(){
+                cleanUp();
+                location.href = "./parkingTime.html";
+            }
+
+            function cleanUp(){
+
             }
         </script>
     </body>
