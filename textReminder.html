@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id="">
-            <button onclick="goBackHome()">back</button>
+            <button onclick="goBackParkingCost()">back</button>
             <h1>Would you like a text reminder 10 minutes before your time runs out?</h1>
             <button onclick="showPhoneNumberInput()">Yes</button>
             <button onclick="goToPaymentMethod()">No</button>    
@@ -31,8 +31,8 @@
                 document.getElementById("phoneNumberInput").style.display = "block";
                 document.getElementById("continueToPay").style.display = "block";
             }
-            function goBackHome() {
-                location.href = "./home.html";
+            function goBackParkingCost() {
+                location.href = "./parkingCost.html";
             }
 
             function validatePhoneInput(){

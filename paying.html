@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="textReminder.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="">
+            <button onclick="goBackTPaymentMethod()">back</button>
+            <h3>Total: $23</h3> 
+            <h1>Pay on the right</h1>
+        </div>        
+        <div id="tapArrow" class="arrow">
+            <p>Tap Phone or Card</p>
+        </div>
+        <div id="insertCardArrow" class="arrow">
+            <p>Insert Card</p>
+        </div>
+        <div id="insertCoinArrow" class="arrow">
+            <p>Insert Coin</p>
+        </div>
+        <script>
+            var insertCoinEvents = parent.globalState.events.insertCoins;
+            var tapEvents = parent.globalState.events.tapCredit;
+            var insertCreditEvents = parent.globalState.events.insertCredit;
+
+            if (parent.globalState.paymentMethod === "cash"){
+                $("#insertCoinArrow").css('display', 'block');
+                insertCoinEvents.push({
+                    id: "insert-coins",
+                    cb: function() {
+                        cleanUpEvents();
+                        goToPrint();
+                    }
+                })   
+            }
+
+            if (parent.globalState.paymentMethod === "credit"){
+                $("#tapArrow").css('display', 'block');
+                $("#insertCardArrow").css('display', 'block');  
+                tapEvents.push({
+                    id: "tap-credit",
+                    cb: function() {
+                        cleanUpEvents();
+                        goToPrint();
+                    }
+                });
+                insertCreditEvents.push({
+                    id: "insert-credit",
+                    cb: function() {
+                        cleanUpEvents();
+                        goToPrint();
+                    }
+                });          
+            }
+
+            function cleanUpEvents() {
+                var removeEventsList = [];
+                for (var i = 0; i < tapEvents.length; i++) {
+                    if (tapEvents[i].id == "tap-credit") {
+                        removeEventsList.push(i);
+                    }
+                }
+                for (var i = 0; i < removeEventsList.length; i++) {
+                    // removes any existing tap events with my id
+                    tapEvents.splice(removeEventsList[i], 1);
+                }
+
+                removeEventsList = [];
+                for (var i = 0; i < insertCreditEvents.length; i++) {
+                    if (insertCreditEvents[i].id == "insert-credit") {
+                        removeEventsList.push(i);
+                    }
+                }
+                for (var i = 0; i < removeEventsList.length; i++) {
+                    // removes any existing tap events with my id
+                    insertCreditEvents.splice(removeEventsList[i], 1);
+                }
+
+                removeEventsList = [];
+                for (var i = 0; i < insertCoinEvents.length; i++) {
+                    if (insertCoinEvents[i].id == "insert-coinss") {
+                        removeEventsList.push(i);
+                    }
+                }
+                for (var i = 0; i < removeEventsList.length; i++) {
+                    // removes any existing tap events with my id
+                    insertCoinEvents.splice(removeEventsList[i], 1);
+                }
+            }
+
+            function goToPrint() {
+                console.log(parent.globalState);
+                location.href = "./print.html";
+            }
+
+            function goBackTPaymentMethod() {
+                console.log(parent.globalState);
+                cleanUpEvents();
+                location.href = "./paymentMethod.html";
+            }
+        </script>
+        <style>
+            #tapArrow {
+                right: 0;
+                top: 165px;
+                display: none;
+            }
+
+            #insertCardArrow {
+                right: 0;
+                top: 330px;
+                display: none;
+            }
+
+            #insertCoinArrow {
+                right: 0;
+                top: 475px;
+                display: none;
+            }
+
+            .arrow {
+                position: absolute;
+                background: red;
+                width: 70px;
+                height: 20px;
+            }
+        </style>
+    </body>
+</html>

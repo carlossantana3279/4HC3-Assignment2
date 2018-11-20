@@ -16,7 +16,7 @@
         <script>
             function goToPay() {
                 console.log(parent.globalState);
-                location.href = "./pay.html";
+                location.href = "./paying.html";
             }
 
             function goBackToTextReminder() {
@@ -25,11 +25,12 @@
             }
 
             function cashSelected(){
-
+                parent.globalState.paymentMethod = "cash";
                 goToPay();
             }
-            function creditSelected(){
 
+            function creditSelected(){
+                parent.globalState.paymentMethod = "credit";
                 goToPay();
             }
         </script>

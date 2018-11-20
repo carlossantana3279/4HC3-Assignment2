@@ -10,7 +10,8 @@ var globalState = {
     tapCredit: [],
     insertCredit: [],
     insertCoins: []
-  }
+  },
+  paymentMethod: ""
 };
 
 // renderer process
