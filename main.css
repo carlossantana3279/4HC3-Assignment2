@@ -8,18 +8,21 @@ f2e2d2 */
 #currentTime {
     float: right;
     font-size: 2em;
+    margin-right: 10px;
 }
 
 #backButton {
     background-color: #46b1c9;
     color: white;
     border-radius: 10px;
-    font-size: 3em;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    font-size: 2em;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3.5%;
+    padding-right: 3.5%;
 }
 
-#content, #demo {
+#content, #demo, #parkingTimeContent {
     text-align: center;
     margin: auto;
 }
@@ -29,8 +32,11 @@ f2e2d2 */
     font-size: 2em;
 }
 
-#hours {
+#hours, #minutes, #ddSpots {
     font-size: 2em;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
 }   
 
 #minutes {
@@ -39,6 +45,8 @@ f2e2d2 */
 
 label {
     font-size: 2em; 
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #expiryDate, #ddSpots {
@@ -64,6 +72,9 @@ label {
     width: 400px;;
     color: white;
     font-size: 2.5em;
+    position: absolute;
+    bottom: 10;
+    left: 200px;;
 }
 
 .phoneInput {
@@ -84,6 +95,7 @@ label {
     bottom: 0;
     right: 0;
     font-size: 2em;
+    margin-right: 20px;
 }
 
 #parkingSpotPrice, #electricCost{
@@ -91,6 +103,7 @@ label {
     bottom: 0;
     right: 0;
     font-size: 2em;
+<<<<<<< HEAD
 }
 
 #continueToPayButton {
@@ -113,4 +126,77 @@ label {
     position: absolute;
     bottom: 10px;
     right: 400px;   
+=======
+    margin-right: 10px;
+}
+
+#ElectricTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 85%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+}
+
+#ElectricTable td, #ElectricTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#ElectricTable td:nth-child(3){
+    text-align: center;
+}
+
+#ElectricTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#ElectricTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #84c0c6;
+    color: white;
+}
+
+.electric{
+    width: 30px;
+    height: 30px;
+}
+
+#costTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 85%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+}
+
+#costTable td, #costTable th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+#costTable td:nth-child(3){
+    text-align: center;
+}
+
+#costTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#costTable th {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: left;
+    background-color: #84c0c6;
+    color: white;
+}
+
+.electric{
+    width: 30px;
+    height: 30px;
+}
+
+#bolt{
+    font-size: 15px;
+>>>>>>> 8f6f755bb4c07c997f14db0507d48addee77090a
 }

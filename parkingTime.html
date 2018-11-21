@@ -30,11 +30,10 @@
             <div id="content">
                 <h1>How much time would you like to purchase?</h1>
                 <br>
-                <br>
-                <br>
 
                 <span id="timeLabel">Time: </span>
                 <label>Hours</label>
+        
                 <select id="hours" name="hours" onchange="updatePriceAndTime()">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -60,7 +59,7 @@
                 
 
                 <h6 id="expiryDate">Parking Expiry: 00:00</h6>
-                <button onclick="goToParkingSpotSelection()" id="nextButton">Next</button>
+                <button onclick="goToParkingSpotSelection()" id="nextButton">Next <i class="fa fa-arrow-circle-right"></i></button>
 
             <h6 id="price">Price: $0.00</h6>
             </div>
@@ -75,7 +74,7 @@
                 var minutes = document.getElementById("minutes");
 
 
-                price.innerHTML = "Price : $" + parent.globalState.cost; 
+                price.innerHTML = "Price : $" + Math.round(parent.globalState.cost * 100) / 100; 
                 hours.value= parent.globalState.hours;
                 minutes.value= parent.globalState.minutes;
                 updatePriceAndTime();
@@ -98,7 +97,7 @@
                 myPrice = hours.value * 6;
                 myPrice = myPrice + (minutes.value * 0.1);
 
-                price.innerHTML = "Price: $" + myPrice;
+                price.innerHTML = "Price: $" + (Math.round(myPrice * 100)/ 100).toFixed(2);
                 myMinutes = +minutes.value + (+hours.value*60);
                 var d2 = new Date(d.getTime() + (myMinutes)*60000);
                 if(d2.getHours() < 10 & d2.getMinutes() < 10){
@@ -123,8 +122,8 @@
                 price = price.replace("$",""); 
                 price = price.replace("Price:", "");
                 price = price.replace(" ", "");
-                parent.globalState.cost = price;
-                parent.globalState.singleParkingSpotCost = price;
+                parent.globalState.cost = Math.round(price * 100)/ 100;
+                parent.globalState.singleParkingSpotCost = Math.round(price * 100)/ 100;
                 parent.globalState.hours = hours;
                 parent.globalState.minutes = minutes;
                 console.log(parent.globalState);

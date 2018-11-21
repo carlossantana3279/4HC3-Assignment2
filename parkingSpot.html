@@ -31,24 +31,22 @@
             
             <div id="content">
                 <h1>How many spots would you like to purchase?</h1>
+                <br>
+                <br>
+                <br>
                 <Label>Spots</Label>
                 <select id="ddSpots" name="spots" onchange="updateCost()">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="5">5</option>
                 </select>  
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <button onclick="goToElectricCarSelect()" id="nextButton">Next</button>
+                <button onclick="goToElectricCarSelect()" id="nextButton">Next <i class="fa fa-arrow-circle-right"></i></button>
                 <h6 id="parkingSpotPrice">Price: $0.00</h6>
             </div>
             
@@ -60,7 +58,7 @@
                 var spots = document.getElementById("ddSpots");
 
                 spots.value = parent.globalState.spots; 
-                price.innerHTML = "Price: $" + parent.globalState.singleParkingSpotCost*spots.value;
+                price.innerHTML = "Price: $" + (Math.round(parent.globalState.singleParkingSpotCost*spots.value * 100) / 100).toFixed(2);
             }
             initialize();
 
@@ -69,10 +67,10 @@
                 var spots = ddSpots.options[ddSpots.selectedIndex].value;
                 var oldPrice = document.getElementById("parkingSpotPrice");
                 var newPrice = parent.globalState.singleParkingSpotCost * spots;
-                oldPrice.innerHTML = "Price: $" + newPrice; 
+                oldPrice.innerHTML = "Price: $" + (Math.round(newPrice * 100) / 100).toFixed(2); 
 
                 parent.globalState.spots = spots;
-                parent.globalState.cost = newPrice;
+                parent.globalState.cost = (Math.round(newPrice * 100) / 100).toFixed(2);
             }
 
             function goToElectricCarSelect() {
@@ -82,7 +80,7 @@
                 price = price.replace("Price: $","");
 
                 parent.globalState.spots = spots;
-                parent.globalState.cost = price;
+                parent.globalState.cost = (Math.round(price * 100) / 100).toFixed(2);
                 console.log(parent.globalState);
                 
 
