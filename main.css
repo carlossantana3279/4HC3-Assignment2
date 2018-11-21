@@ -53,6 +53,18 @@ label {
     font-size: 2em;
 }
 
+#phoneNumberInput {
+    margin: 15px;
+    text-align: center;
+    font-size: 2em;
+}
+
+#numberPad button {
+    font-size: 1.8em;
+    padding: 5px 15px;
+    margin: 2px;
+}
+
 #nextButton {
     height: 150px;
     border-radius: 20px;
@@ -63,6 +75,19 @@ label {
     position: absolute;
     bottom: 10;
     left: 200px;;
+}
+
+.phoneInput {
+    width: 100px;
+}
+
+.smallButton {
+    height: 75px;
+    border-radius: 20px;
+    background-color: #46b1c9;
+    width: 200px;;
+    color: white;
+    font-size: 2em;
 }
 
 #price {
@@ -78,6 +103,28 @@ label {
     bottom: 0;
     right: 0;
     font-size: 2em;
+}
+
+#continueToPayButton {
+    position: absolute;
+    bottom: 30px;
+    right: 170px;
+    height: 200px;
+    border-radius: 20px;
+    background-color: #46b1c9;
+    width: 200px;;
+    color: white;
+    font-size: 2.5em;
+}
+
+#continueToPayButton:disabled {
+    background-color: grey;
+}
+
+#numberPad {
+    position: absolute;
+    bottom: 10px;
+    right: 400px;   
     margin-right: 10px;
 }
 
