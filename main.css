@@ -1,0 +1,69 @@
+/*
+46b1c9
+84c0c6
+9fb7b9
+bcc1ba
+f2e2d2 */
+
+#currentTime {
+    float: right;
+    font-size: 2em;
+}
+
+#backButton {
+    background-color: #46b1c9;
+    color: white;
+    border-radius: 10px;
+    font-size: 3em;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+#content, #demo {
+    text-align: center;
+    margin: auto;
+}
+
+#timeLabel {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+#hours {
+    font-size: 2em;
+}   
+
+#minutes {
+    font-size: 2em;
+}
+
+label {
+    font-size: 2em; 
+}
+
+#expiryDate, #ddSpots {
+    font-size: 2em;
+}
+
+#nextButton {
+    height: 150px;
+    border-radius: 20px;
+    background-color: #46b1c9;
+    width: 400px;;
+    color: white;
+    font-size: 2.5em;
+}
+
+#price {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 2em;
+}
+
+#parkingSpotPrice, #electricCost{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 2em;
+}

@@ -2,12 +2,13 @@
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-         <!--<link rel="stylesheet" href="home.css">-->
+         <link rel="stylesheet" href="main.css">
+         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body>
-        <button onclick="goBackHome()">back</button>  
-        <div id="parkingTimeContent">
-            <h3 id="currentTime">Current Time: </h3>
+        <span><button onclick="goBackHome()" id="backButton"><i class="fa fa-arrow-left"></i></button></span>  
+        <span id="parkingTimeContent">
+            <span><p id="currentTime">Current Time: </p></span>
             <script>
                 function updateCurrentTime(){
                     var currentTime = document.getElementById("currentTime");
@@ -26,34 +27,46 @@
                 }    
                 updateCurrentTime();
             </script>
-            <h1>How much time would you like to purchase?</h1>
-            <h6>Time: </h6>
-            <label>Hours</label>
-            <select id="hours" name="hours" onchange="updatePriceAndTime()">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-            </select>
-            <Label>Minutes</Label>
-            <select id="minutes" name="minutes" onchange="updatePriceAndTime()">
-                    <option value="0">0</option>
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="45">45</option>
-            </select>  
+            <div id="content">
+                <h1>How much time would you like to purchase?</h1>
+                <br>
+                <br>
+                <br>
 
-            <h6 id="expiryDate">Parking Expiry: 00:00</h6>
-            <button onclick="goToParkingSpotSelection()">Next</button>
+                <span id="timeLabel">Time: </span>
+                <label>Hours</label>
+                <select id="hours" name="hours" onchange="updatePriceAndTime()">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <Label>Minutes</Label>
+                <select id="minutes" name="minutes" onchange="updatePriceAndTime()">
+                        <option value="0">0</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                </select>  
+                <br>
+                <br>
+                <br>
+                <br>
+                
+
+                <h6 id="expiryDate">Parking Expiry: 00:00</h6>
+                <button onclick="goToParkingSpotSelection()" id="nextButton">Next</button>
 
             <h6 id="price">Price: $0.00</h6>
+            </div>
+            
 
-        </div>
+        </span>
 
         <script>
             function initialize(){

@@ -3,23 +3,55 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
          <!--<link rel="stylesheet" href="home.css">-->
+         <link rel="stylesheet" href="main.css">
+         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body>
-        <button onclick="goBackToParkingTime()">back</button>  
-        <div id="parkingTimeContent">
-              
-            <h1>How many spots would you like to purchase?</h1>
-            <Label>Spots</Label>
-            <select id="ddSpots" name="spots" onchange="updateCost()">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-            </select>  
-
-            <button onclick="goToElectricCarSelect()">Next</button>
-            <h6 id="parkingSpotPrice">Price: $0.00</h6>
+        <button onclick="goBackToParkingTime()" id="backButton"><i class="fa fa-arrow-left"></i></button>  
+        <span id="parkingTimeContent">
+                <span><p id="currentTime">Current Time: </p></span>
+                <script>
+                    function updateCurrentTime(){
+                        var currentTime = document.getElementById("currentTime");
+                        var d = new Date();
+    
+                        
+                        if(d.getHours() < 10 & d.getMinutes() < 10){
+                            currentTime.innerHTML = "Time: "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                        }else if (d.getHours() < 10){
+                            currentTime.innerHTML = "Time: "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                        }else if (d.getMinutes() < 10){ 
+                            currentTime.innerHTML = "Time: " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                        }else{
+                            currentTime.innerHTML = "Time: " + d.getHours() + ":" + d.getMinutes();
+                        }
+                    }    
+                    updateCurrentTime();
+                </script>
+            
+            <div id="content">
+                <h1>How many spots would you like to purchase?</h1>
+                <Label>Spots</Label>
+                <select id="ddSpots" name="spots" onchange="updateCost()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                </select>  
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button onclick="goToElectricCarSelect()" id="nextButton">Next</button>
+                <h6 id="parkingSpotPrice">Price: $0.00</h6>
+            </div>
+            
         </div>
 
         <script>
