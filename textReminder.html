@@ -3,42 +3,135 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="textReminder.css">
+        <link rel="stylesheet" href="main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
-    <body>
-        <div id="">
-            <button onclick="goBackParkingCost()">back</button>
+    <body >
+        <button onclick="goBackParkingCost()" id="backButton"><i class="fa fa-arrow-left"></i></button>
+        <span><p id="currentTime">Current Time: </p></span>
+        <div id="content">
             <h1>Would you like a text reminder 10 minutes before your time runs out?</h1>
-            <button onclick="showPhoneNumberInput()">Yes</button>
-            <button onclick="goToPaymentMethod()">No</button>    
+            <button onclick="showPhoneNumberInput()" class="smallButton">Yes</button>
+            <button onclick="goToPaymentMethod()" class="smallButton">No</button>    
         </div>
         <div id="phoneNumberInput">
-            <input id="areaCode" type="text" maxlength="3" minlength="3" pattern="[0-9]{3}">
+            <input id="areaCode" class="phoneInput" type="text" maxlength="3" minlength="3" pattern="[0-9]{3}">
             <span>-</span>
-            <input id="middle" type="text" maxlength="3" minlength="3" pattern="[0-9]{3}" />
+            <input id="middle" class="phoneInput" type="text" maxlength="3" minlength="3" pattern="[0-9]{3}" />
             <span>-</span>
-            <input id="last" type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" />
+            <input id="last" class="phoneInput" type="text" maxlength="4" minlength="4" pattern="[0-9]{4}" />
         </div>
-        <div id="continueToPay">
-            <button onclick="validatePhoneInput()">Continue To Pay</button>
+        <br>
+        <span id="numberPad">
+            <button onclick="insterNumPad(1);">1</button>
+            <button onclick="insterNumPad(2);">2</button>
+            <button onclick="insterNumPad(3);">3</button>
+            <br>
+            <button onclick="insterNumPad(4);">4</button>
+            <button onclick="insterNumPad(5);">5</button>
+            <button onclick="insterNumPad(6);">6</button>
+            <br>
+            <button onclick="insterNumPad(7);">7</button>
+            <button onclick="insterNumPad(8);">8</button>
+            <button onclick="insterNumPad(9);">9</button>
+            <br>
+            <button onclick="insterNumPad(0);">0</button>
+            <button onclick="insterNumPad(-1);">Del</button>
+        </span>
+        <br>
+        <br>
+        <div id="content">
+            <button onclick="validatePhoneInput()" id="continueToPayButton" class="continueToPay" disabled>Continue To Pay</button>
         </div>
         <script>
+            function insterNumPad(number){
+
+                if (number === -1){
+                    $('#continueToPayButton').prop('disabled', true);
+
+                    if($('#areaCode').val().length == 3 && $('#middle').val().length == 3 && $('#last').val().length > 0)
+                    {
+                        $('#last').val($('#last').val().substring(0, $('#last').val().length -1))
+                        $('#last').focus();         
+                        return;
+                    }
+
+                    if($('#areaCode').val().length == 3 && $('#middle').val().length > 0)
+                    {
+                        $('#middle').val($('#middle').val().substring(0, $('#middle').val().length -1))
+                        $('#middle').focus(); 
+                        return;
+                    }
+
+                    if($('#areaCode').val().length <= 3)
+                    {
+                        $('#areaCode').val($('#areaCode').val().substring(0, $('#areaCode').val().length -1))
+                        $('#areaCode').focus(); 
+                        return;
+                    }
+
+                    return;
+                }
+
+                if($('#areaCode').val().length < 3)
+                {
+                    $('#areaCode').val($('#areaCode').val() + number)
+                    if ($('#areaCode').val().length == 3)
+                    {
+                        $('#middle').focus(); 
+                    }else{
+                        $('#areaCode').focus(); 
+                    }
+                    return;
+                }
+
+                if($('#middle').val().length < 3)
+                {
+                    $('#middle').val($('#middle').val() + number)
+                    if ($('#middle').val().length == 3)
+                    {
+                        $('#last').focus(); 
+                    }else{
+                        $('#middle').focus(); 
+                    }
+                    return;
+                }
+
+                if($('#last').val().length < 4)
+                {
+                    $('#last').val($('#last').val() + number)
+                    if ($('#last').val().length == 4){
+                        $('#continueToPayButton').prop('disabled', false);
+                    }   
+                    $('#last').focus(); 
+                    return;
+                }
+
+
+
+                $('#last').focus(); 
+            }
+
             function goToPaymentMethod() {
                 console.log(parent.globalState);
                 location.href = "./paymentMethod.html";
             }
+
             function showPhoneNumberInput() {
                 document.getElementById("phoneNumberInput").style.display = "block";
-                document.getElementById("continueToPay").style.display = "block";
+                $(".continueToPay").css("display","block");
+                $("#numberPad").css("display","block");
+
+                $('#areaCode').focus();
             }
+
             function goBackParkingCost() {
                 location.href = "./parkingCost.html";
             }
 
             function validatePhoneInput(){
-                //validate inputs
-                
-
+                //validate inputs   
                 location.href = "./paymentMethod.html";
             }
 
@@ -67,6 +160,22 @@
                     $('#middle').focus();
                 }
             });
+
+            function updateCurrentTime(){
+                var currentTime = document.getElementById("currentTime");
+                var d = new Date();
+                
+                if(d.getHours() < 10 & d.getMinutes() < 10){
+                    currentTime.innerHTML = "Time: "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                }else if (d.getHours() < 10){
+                    currentTime.innerHTML = "Time: "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                }else if (d.getMinutes() < 10){ 
+                    currentTime.innerHTML = "Time: " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                }else{
+                    currentTime.innerHTML = "Time: " + d.getHours() + ":" + d.getMinutes();
+                }
+            }    
+            updateCurrentTime();
         </script>
     </body>
 </html>
