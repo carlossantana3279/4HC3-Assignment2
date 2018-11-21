@@ -1,8 +1,9 @@
 button {
-    width: 100%;
+    width: 70%;
     height: 230px;
     padding-left: 5%;
     padding-right: 5%;
+    padding-top:5%;
     margin-bottom: 5%;
     background-color: #46b1c9;
     color: white;
@@ -11,11 +12,26 @@ button {
 }
 
 #homeContent {
-    padding: 5%;
+    padding-top: 30px;
+    text-align: center;
 }
 
 body {
     /* background-color: #9fb7b9; */
+}
+
+#pay-icon{
+    font-size: 55px;
+}
+
+#payBtn{
+    padding-top: 0px;
+    height: 50%;
+}
+
+#refundBtn{
+    padding-top:0px;
+    height: 30%;
 }
 
 /*
