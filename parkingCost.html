@@ -2,12 +2,34 @@
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-         <!--<link rel="stylesheet" href="home.css">-->
+         <link rel="stylesheet" href="main.css">
+         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body>
-        <button onclick="goBackToParkingElectric()">back</button>  
-        <div id="parkingTimeContent">
-              
+        <button onclick="goBackToParkingElectric()" id="backButton"><i class="fa fa-arrow-left"></i></button>  
+        
+        <span id="parkingTimeContent">
+            <span><p id="currentTime">Current Time: </p></span>
+            <script>
+                function updateCurrentTime(){
+                    var currentTime = document.getElementById("currentTime");
+                    var d = new Date();
+
+                    
+                    if(d.getHours() < 10 & d.getMinutes() < 10){
+                        currentTime.innerHTML = "Time: "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                    }else if (d.getHours() < 10){
+                        currentTime.innerHTML = "Time: "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                    }else if (d.getMinutes() < 10){ 
+                        currentTime.innerHTML = "Time: " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                    }else{
+                        currentTime.innerHTML = "Time: " + d.getHours() + ":" + d.getMinutes();
+                    }
+                }    
+                updateCurrentTime();
+            </script>
+            <br>
+            <br>
             <table id="costTable">
                 <tr>
                     <th>Spot</th>
@@ -18,9 +40,16 @@
             </table>
             
             <h1 id="totalCost">Total: $26.00</h1>
-
-            <button onclick="goToPhoneNumber()">Pay</button>
-        </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="content">
+                <button onclick="goToPhoneNumber()" id="nextButton">Pay</button>
+            </div>
+        </span>
 
         <script>
             function initialize(){
@@ -51,6 +80,7 @@
                         var c3 = row2.insertCell(2);
                         var c4 = row2.insertCell(3);
                         
+                        c1.innerHTML = i;
                         c2.innerHTML = "Charging Fee: ";
                         c3.innerHTML = parent.globalState.hours +":" + parent.globalState.minutes + "x $1";
                         c4.innerHTML = "$" + Math.round((parent.globalState.hours + parent.globalState.minutes*0.01666) * 100 ) / 100;

@@ -29,6 +29,7 @@
                     updateCurrentTime();
                 </script>
             <div id="content">
+                <br>
                 <form class="demo" id="demo"> 
                         <table id="ElectricTable">
                             <tr>
@@ -38,6 +39,15 @@
                             </tr>
                         </table>
                     </form>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <button onclick="goToElectricCarSelect()" id="nextButton">Next</button>
                 <h6 id="electricCost">Price: $10.00</h6>
             </div>
@@ -60,7 +70,7 @@
                     var cell3 = row.insertCell(2);
 
                     cell1.innerHTML = i;
-                    cell2.innerHTML = parent.globalState.hours + " hours, " + parent.globalState.minutes + " minutes";
+                    cell2.innerHTML = parent.globalState.hours + ":" + parent.globalState.minutes;
                     cell3.innerHTML = "<input type='checkbox' class='electric' name='electric' onchange='updatePrice()'> ";
   
                     if(parent.globalState.spots == 1){
