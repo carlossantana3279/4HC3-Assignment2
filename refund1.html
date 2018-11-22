@@ -1,31 +1,59 @@
 <html>
-    <button onclick="goBackHome()">back</button>
-    <h1>Insert your ticket on the right to get started</h1>
-    <script>
-    var ticketEvents = parent.globalState.events.insertTicket;
-    ticketEvents.push({
-        id: "refund1-ticket",
-        cb: function() {
-            cleanUpEvents();
-            location.href = "./refund2.html";
-        }
-    })
-    function goBackHome() {
-        cleanUpEvents();
-        location.href = "./home.html";
-    }
-
-    function cleanUpEvents() {
-        var refundEvents = [];
-        for (var i = 0; i < ticketEvents.length; i++) {
-            if (ticketEvents[i].id == "refund1-ticket") {
-                refundEvents.push(i);
+    <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" href="main.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    </head>
+    <body>
+            <button onclick="goBackHome()" id="backButton"><i class="fa fa-arrow-left"></i></button>
+            <span><p id="currentTime">Current Time: </p></span>
+                <script>
+                    function updateCurrentTime(){
+                        var currentTime = document.getElementById("currentTime");
+                        var d = new Date();
+    
+                        
+                        if(d.getHours() < 10 & d.getMinutes() < 10){
+                        currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                    }else if (d.getHours() < 10){
+                            currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                        }else if (d.getMinutes() < 10){ 
+                            currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                        }else{
+                            currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":" + d.getMinutes();
+                        }
+                    }    
+                    updateCurrentTime();
+                </script>
+                <div id="content">
+                        <h1>Insert your ticket on the right to get started</h1>
+                </div>
+            <script>
+            var ticketEvents = parent.globalState.events.insertTicket;
+            ticketEvents.push({
+                id: "refund1-ticket",
+                cb: function() {
+                    cleanUpEvents();
+                    location.href = "./refund2.html";
+                }
+            })
+            function goBackHome() {
+                cleanUpEvents();
+                location.href = "./home.html";
             }
-        }
-        for (var i = 0; i < refundEvents.length; i++) {
-            // removes any existing refund events with my id
-            ticketEvents.splice(refundEvents[i], 1);
-        }
-    }
-    </script>   
+        
+            function cleanUpEvents() {
+                var refundEvents = [];
+                for (var i = 0; i < ticketEvents.length; i++) {
+                    if (ticketEvents[i].id == "refund1-ticket") {
+                        refundEvents.push(i);
+                    }
+                }
+                for (var i = 0; i < refundEvents.length; i++) {
+                    // removes any existing refund events with my id
+                    ticketEvents.splice(refundEvents[i], 1);
+                }
+            }
+            </script>   
+    </body>
 </html>
