@@ -12,6 +12,7 @@
         <div id="content">
             <h1>Total: $23</h1> 
             <h1>Pay on the right</h1>
+            <p id="textInfo">Insert Card or Input Card Number</p>
             <input id="creditCardNumbers" type="text" maxlength="16" minlength="16" pattern="[0-9]{16}">
         </div>    
 
@@ -101,6 +102,17 @@
                     cb: function() {
                         cleanUpEvents();
                         document.getElementById("numberPad").style.display = "block";
+                        document.getElementById("creditCardNumbers").style.display = "block";
+                        document.getElementById("textInfo").style.display = "block";
+
+                        insertCreditEvents.push({
+                            id: "actuallyInsert-credit",
+                            cb: function(){
+                                cleanUpEvents();
+                                goToPrint();
+                            }
+                        });
+
                     }
                 });          
             }
@@ -119,7 +131,7 @@
 
                 removeEventsList = [];
                 for (var i = 0; i < insertCreditEvents.length; i++) {
-                    if (insertCreditEvents[i].id == "insert-credit") {
+                    if (insertCreditEvents[i].id == "insert-credit" || insertCreditEvents[i].id == "actuallyInsert-credit") {
                         removeEventsList.push(i);
                     }
                 }
@@ -130,7 +142,7 @@
 
                 removeEventsList = [];
                 for (var i = 0; i < insertCoinEvents.length; i++) {
-                    if (insertCoinEvents[i].id == "insert-coinss") {
+                    if (insertCoinEvents[i].id == "insert-coins") {
                         removeEventsList.push(i);
                     }
                 }
@@ -207,6 +219,15 @@
 
             #okay:disabled {
                 background-color: grey;            
+            }
+
+            #creditCardNumbers {
+                display: none;
+                margin: auto;
+            }
+            #textInfo {
+                display: none;
+                margin: auto;
             }
         </style>
     </body>
