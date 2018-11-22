@@ -5,10 +5,12 @@
         <link rel="stylesheet" href="main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <meta charset=utf-8>
     </head>
     <body>
         <div id="content">
-            <h1 class="saving" style="margin-top: 200px;">Printing <span id="currentTicket">1</span> of <span id="numTickets">0</span> tickets</h1>
+            <h1 class="saving" style="margin-top: 200px;">Printing <span id="currentTicket">1</span> of <span id="numTickets">0</span> tickets <span></h1>
+            <img src="loading.gif"> </span>
         </div>    
             
         <script>
@@ -33,10 +35,16 @@
 
             async function delayedLog(item){
                 $("#currentTicket").html(item);
-                var message = 'Ticket #' + item;
+                var message = 'Ticket #' + item + '\n'
+                              +'ID: ' + makeid() + '\n'
+                                + '--------------------\n'
+                                + 'Expiration Time:'+ getExpirationTime() +' \n'
+                                ;
                 await sleep(3000);
                 printTicket(message);
             }
+
+
 
             async function goToThankYou(){
                 for (const item of tickets){
@@ -48,6 +56,27 @@
             function printTicket(message){
                 alert(message);
             }
+
+            function getExpirationTime(){
+                var currentDate = new Date();
+
+                var myPrice = parent.globalState.hours * 6;
+                myPrice = myPrice + (parent.globalState.minutes * 0.1);
+
+                myMinutes = +parent.globalState.minutes + (+parent.globalState.hours*60);
+                var d2 = new Date(currentDate.getTime() + (myMinutes)*60000);
+                return "" + d2.getHours() + ":"+ d2.getMinutes();
+            }
+
+            function makeid() {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < 5; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }   
 
             function updateCurrentTime(){
                 var currentTime = document.getElementById("currentTime");
