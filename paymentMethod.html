@@ -2,16 +2,18 @@
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="textReminder.css">
+        <link rel="stylesheet" href="main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     </head>
     <body>
-        <div id="">
-            <button onclick="goBackToTextReminder()">back</button>
+        <button onclick="goBackToTextReminder()" id="backButton"><i class="fa fa-arrow-left"></i></button>
+        <span><p id="currentTime">Current Time: </p></span>
+        <div id="content">
             <h1>Select a payment option</h1>
-            <h3>Total: $<span id="cost"></span></h3>
-            <button onclick="cashSelected()">Cash</button>
-            <button onclick="creditSelected()">Debit/Credit</button>    
+            <h1>Total: $<span id="cost"></span></h1>
+            <button onclick="cashSelected()" class="smallButton" >Cash <i class="far fa-money-bill-alt"></i></button>
+            <button onclick="creditSelected()" class="smallButton">Debit/Credit <i class="far fa-credit-card"></i></button>    
         </div>        
         <script>
             $(document).ready(function(){
@@ -37,6 +39,23 @@
                 parent.globalState.paymentMethod = "credit";
                 goToPay();
             }
+
+            function updateCurrentTime(){
+                var currentTime = document.getElementById("currentTime");
+                var d = new Date();
+
+                
+                if(d.getHours() < 10 & d.getMinutes() < 10){
+                    currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                }else if (d.getHours() < 10){
+                    currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                }else if (d.getMinutes() < 10){ 
+                    currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                }else{
+                    currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":" + d.getMinutes();
+                }
+            }    
+            updateCurrentTime();
         </script>
     </body>
 </html>

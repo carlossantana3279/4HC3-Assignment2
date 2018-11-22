@@ -85,9 +85,10 @@ label {
     height: 75px;
     border-radius: 20px;
     background-color: #46b1c9;
-    width: 200px;;
+    width: 250px;
     color: white;
     font-size: 2em;
+    margin: 10px;
 }
 
 #price {
@@ -107,7 +108,7 @@ label {
 
 #continueToPayButton {
     position: absolute;
-    bottom: 30px;
+    bottom: 15px;
     right: 170px;
     height: 200px;
     border-radius: 20px;
@@ -200,4 +201,8 @@ label {
 
 #pay-icon{
     font-size: 100px;
+}
+
+#creditCardNumbers {
+    font-size: 2.2em;
 }

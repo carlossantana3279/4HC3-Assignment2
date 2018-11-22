@@ -2,25 +2,75 @@
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="textReminder.css">
+        <link rel="stylesheet" href="main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     </head>
     <body>
-        <div id="">
-            <button onclick="goBackTPaymentMethod()">back</button>
-            <h3>Total: $23</h3> 
+        <span><p id="currentTime">Current Time: </p></span>
+        <button onclick="goBackTPaymentMethod()"id="backButton"><i class="fa fa-arrow-left"></i></button>
+        <div id="content">
+            <h1>Total: $23</h1> 
             <h1>Pay on the right</h1>
-        </div>        
+            <input id="creditCardNumbers" type="text" maxlength="16" minlength="16" pattern="[0-9]{16}">
+        </div>    
+
+        <div id="numberPad">
+                <button onclick="insterNumPad(1);">1</button>
+                <button onclick="insterNumPad(2);">2</button>
+                <button onclick="insterNumPad(3);">3</button>
+                <br>
+                <button onclick="insterNumPad(4);">4</button>
+                <button onclick="insterNumPad(5);">5</button>
+                <button onclick="insterNumPad(6);">6</button>
+                <br>
+                <button onclick="insterNumPad(7);">7</button>
+                <button onclick="insterNumPad(8);">8</button>
+                <button onclick="insterNumPad(9);">9</button>
+                <br>
+                <button onclick="insterNumPad(0);">0</button>
+                <button onclick="insterNumPad(-1);" style="position: relative; bottom: 7px;  width: 55px; height: 67px; font-size: 18px;">Del</button>
+                <button id="okay" onclick="insterNumPad(1000);" style="position: relative; bottom: 7px;  width: 55px; height: 67px; font-size: 18px;" disabled>OK</button>
+            </div>
         <div id="tapArrow" class="arrow">
-            <p>Tap Phone or Card</p>
+            <p><i class="fa fa-arrow-right fa-4x"></i> <br>Tap Phone or Card</p>
         </div>
         <div id="insertCardArrow" class="arrow">
-            <p>Insert Card</p>
+            <p><i class="fa fa-arrow-right fa-4x"></i> <br>Insert Card</p>
         </div>
         <div id="insertCoinArrow" class="arrow">
-            <p>Insert Coin</p>
+            <p><i class="fa fa-arrow-right fa-4x"></i> <br>Insert Coins</p>
         </div>
         <script>
+
+            function insterNumPad(number){
+
+                if (number === -1){
+                    $('#okay').prop('disabled', true);
+                    $('#creditCardNumbers').val($('#creditCardNumbers').val().substring(0, $('#creditCardNumbers').val().length -1))
+                    $('#creditCardNumbers').focus();         
+                    return;
+                }
+
+                if (number === 1000){
+                    goToPrint();       
+                    return;
+                }
+                     
+                if ($('#creditCardNumbers').val().length < 16)
+                {
+                    $('#creditCardNumbers').val($('#creditCardNumbers').val() + number);
+                    if ($('#creditCardNumbers').val().length == 16)
+                    {
+                        $('#okay').prop('disabled', false);
+                    }                    
+                }
+
+
+                $('#creditCardNumbers').focus(); 
+                return;
+            }
+
             var insertCoinEvents = parent.globalState.events.insertCoins;
             var tapEvents = parent.globalState.events.tapCredit;
             var insertCreditEvents = parent.globalState.events.insertCredit;
@@ -50,7 +100,7 @@
                     id: "insert-credit",
                     cb: function() {
                         cleanUpEvents();
-                        goToPrint();
+                        document.getElementById("numberPad").style.display = "block";
                     }
                 });          
             }
@@ -100,31 +150,63 @@
                 cleanUpEvents();
                 location.href = "./paymentMethod.html";
             }
+
+            function updateCurrentTime(){
+                var currentTime = document.getElementById("currentTime");
+                var d = new Date();
+
+                
+                if(d.getHours() < 10 & d.getMinutes() < 10){
+                    currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
+                }else if (d.getHours() < 10){
+                    currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0"+ d.getHours() + ":" + d.getMinutes();
+                }else if (d.getMinutes() < 10){ 
+                    currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":"  +"0"+ d.getMinutes();   
+                }else{
+                    currentTime.innerHTML = "<i class='far fa-clock'></i>  " + d.getHours() + ":" + d.getMinutes();
+                }
+            }    
+            updateCurrentTime();
         </script>
         <style>
             #tapArrow {
                 right: 0;
-                top: 165px;
+                top: 115px;
                 display: none;
             }
 
             #insertCardArrow {
                 right: 0;
-                top: 330px;
+                top: 300px;
                 display: none;
             }
 
             #insertCoinArrow {
                 right: 0;
-                top: 475px;
+                top: 440px;
                 display: none;
             }
 
             .arrow {
                 position: absolute;
-                background: red;
-                width: 70px;
+                width: 100px;
                 height: 20px;
+                font-size: 14px;
+                text-align: right;
+                margin: 10px;
+            }
+
+            #numberPad {
+                font-size: 1.5em;
+                position: absolute;
+                top: 250px;
+                right: 270px;
+                padding: 0px 10px;
+                display: none;
+            }
+
+            #okay:disabled {
+                background-color: grey;            
             }
         </style>
     </body>
