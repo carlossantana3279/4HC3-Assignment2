@@ -54,7 +54,7 @@
         <script>
             function initialize(){
                 var price = document.getElementById("totalCost");
-                price.innerHTML = "Total: $" + Math.round(parent.globalState.cost * 100) / 100;
+                price.innerHTML = "Total: $" + (Math.round(parent.globalState.cost * 100) / 100).toFixed(2);
             }
             initialize();
 
