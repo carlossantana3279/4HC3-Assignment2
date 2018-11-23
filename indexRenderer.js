@@ -1,3 +1,6 @@
+// renderer process
+var ipcRenderer = require('electron').ipcRenderer;
+
 var globalState = {
   test: "has things",
   events: {
@@ -17,11 +20,18 @@ var globalState = {
   minutes: 0,
   spots: 1,
   electricSpots: [],
-  paymentMethod: ""
+  paymentMethod: "",
+  printReceipt: function (message){
+    ipcRenderer.send('print-ticket', message);
+    console.log('sent the event');
+  },
+  sendText: function (message){
+    ipcRenderer.send('send-text', message);
+    console.log('sent the event');
+  }
 }
 
-// renderer process
-var ipcRenderer = require('electron').ipcRenderer;
+
 ipcRenderer.on('insert-ticket', function (event,store) {
     globalState.events.insertTicket.forEach(it => {
         it.cb(store);

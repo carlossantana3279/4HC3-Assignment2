@@ -107,9 +107,7 @@
                     $('#last').focus(); 
                     return;
                 }
-
-
-
+                
                 $('#last').focus(); 
             }
 
@@ -132,6 +130,9 @@
 
             function validatePhoneInput(){
                 //validate inputs   
+                
+                parent.globalState.sendText('Your time is up in 10 min');
+
                 location.href = "./paymentMethod.html";
             }
 
