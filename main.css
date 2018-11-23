@@ -237,3 +237,9 @@ label {
     background-color: #84c0c6;
     color: white;
 }
+
+#insertTicketArrow {
+    position: absolute;
+    top: 45;
+    right: 0;
+}

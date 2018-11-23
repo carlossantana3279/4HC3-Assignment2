@@ -34,7 +34,9 @@
             <b>Charging: </b>$1/hour
         </div>
         <div id="change" class="info">
-            5¢
+            <b>Change Collection</b>
+            <p id="changeBox"></p>
+            <button onclick="takeChange()">Take Change</button>
         </div>
     </div>
     <script>
@@ -49,8 +51,12 @@
         })
 
         ipc.on('output-change', function(event, store) {
-            document.getElementById('change').innerText = store;
+            document.getElementById('changeBox').innerText = store;
         });
+
+        function takeChange() {
+            document.getElementById('changeBox').innerText = "";
+        }
       </script>
   </body>
 </html>
