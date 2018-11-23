@@ -44,14 +44,14 @@
                 printTicket(message);
             }
 
-
-
             async function goToThankYou(){
                 for (const item of tickets){
                     await delayedLog(item);
                 }
                 setTimeout(function(){ location.href = "./thankyou.html";}, 2000);
             }
+            
+            parent.globalState.printReceipt("<hr> <h1>Test </h1> <hr>");
 
             function printTicket(message){
                 alert(message);
@@ -72,7 +72,7 @@
                 var text = "";
                 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-                for (var i = 0; i < 5; i++)
+                for (var i = 0; i < 7; i++)
                     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
                 return text;

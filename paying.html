@@ -10,10 +10,11 @@
         <span><p id="currentTime">Current Time: </p></span>
         <button onclick="goBackTPaymentMethod()"id="backButton"><i class="fa fa-arrow-left"></i></button>
         <div id="content">
-            <h1>Total: $23</h1> 
-            <h1>Pay on the right</h1>
+            <h1>Total: <span id="cost"></span></h1> 
+            <h1 style="margin: 5px;">Pay on the right</h1>
             <p id="textInfo">Insert Card or Input Card Number</p>
-            <input id="creditCardNumbers" type="text" maxlength="16" minlength="16" pattern="[0-9]{16}">
+            <button onclick="enterCreditCard()" id="enterManually" class="smallButton" style="height: 100px;">Enter Credit Card Number Manually</button>
+            <input id="creditCardNumbers" type="text" maxlength="16" minlength="16" pattern="[0-9]{16}" style="font-size: 24px;">
         </div>    
 
         <div id="numberPad">
@@ -43,6 +44,16 @@
             <p><i class="fa fa-arrow-right fa-4x"></i> <br>Insert Coins</p>
         </div>
         <script>
+            $(document).ready(function(){
+                $("#cost").html(parent.globalState.cost);
+            });
+
+            function enterCreditCard(){
+                document.getElementById("enterManually").style.display = "none";
+                document.getElementById("numberPad").style.display = "block";
+                document.getElementById("creditCardNumbers").style.display = "block";
+                document.getElementById("textInfo").style.display = "block";
+            }
 
             function insterNumPad(number){
 
@@ -66,7 +77,6 @@
                         $('#okay').prop('disabled', false);
                     }                    
                 }
-
 
                 $('#creditCardNumbers').focus(); 
                 return;
@@ -101,18 +111,7 @@
                     id: "insert-credit",
                     cb: function() {
                         cleanUpEvents();
-                        document.getElementById("numberPad").style.display = "block";
-                        document.getElementById("creditCardNumbers").style.display = "block";
-                        document.getElementById("textInfo").style.display = "block";
-
-                        insertCreditEvents.push({
-                            id: "actuallyInsert-credit",
-                            cb: function(){
-                                cleanUpEvents();
-                                goToPrint();
-                            }
-                        });
-
+                        goToPrint();
                     }
                 });          
             }
@@ -166,8 +165,7 @@
             function updateCurrentTime(){
                 var currentTime = document.getElementById("currentTime");
                 var d = new Date();
-
-                
+                       
                 if(d.getHours() < 10 & d.getMinutes() < 10){
                     currentTime.innerHTML = "<i class='far fa-clock'></i> "  +"0" + d.getHours() + ":"  +"0"+ d.getMinutes();
                 }else if (d.getHours() < 10){
@@ -211,7 +209,7 @@
             #numberPad {
                 font-size: 1.5em;
                 position: absolute;
-                top: 250px;
+                top: 230px;
                 right: 270px;
                 padding: 0px 10px;
                 display: none;
