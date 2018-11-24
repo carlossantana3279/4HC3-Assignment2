@@ -28,7 +28,11 @@ var globalState = {
   sendText: function (message){
     ipcRenderer.send('send-text', message);
     console.log('sent the event');
-  }
+  },
+  outputChange: function(message){
+    ipcRenderer.send('output-change', message);
+    console.log('sent the event');
+  },
 }
 
 

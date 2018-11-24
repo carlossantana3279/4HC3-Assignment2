@@ -54,7 +54,7 @@
         <script>
             function initialize(){
                 var price = document.getElementById("totalCost");
-                price.innerHTML = "Total: $" + Math.round(parent.globalState.cost * 100) / 100;
+                price.innerHTML = "Total: $" + (Math.round(parent.globalState.cost * 100) / 100).toFixed(2);
             }
             initialize();
 
@@ -71,7 +71,7 @@
 
                     cell1.innerHTML = i;
                     cell2.innerHTML = parent.globalState.hours + "h, " + parent.globalState.minutes + " min";
-                    if(parent.globalState.electricSpots[i-1] === 1){
+                    if(parent.globalState.electricSpots[i-1] === 1 || (parent.globalState.electricSpots == true && parent.globalState.spots == 1)){
                         cell3.innerHTML = "Yes";
                         rowCounter +=1;
                         var row2 = table.insertRow(rowCounter);

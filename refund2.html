@@ -52,7 +52,11 @@
                 location.href = "./refund1.html";
             }
             function goBackHome() {
-                location.href = "./home.html";
+                alert("Dispensing change");
+                setTimeout(function () {
+                    parent.globalState.outputChange("7 x $1.00 \n 2 x $0.25");
+                    location.href = "./home.html";
+                }, 1000);
             }
         </script>
     </body>

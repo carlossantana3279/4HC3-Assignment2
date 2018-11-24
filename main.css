@@ -65,7 +65,7 @@ label {
     margin: 2px;
 }
 
-#nextButton {
+#nextButton, #nextButton_time {
     height: 150px;
     border-radius: 20px;
     background-color: #46b1c9;
@@ -122,6 +122,12 @@ label {
 #continueToPayButton:disabled {
     background-color: grey;
 }
+
+#nextButton_time:disabled{
+    background-color: grey;
+}
+
+
 
 #numberPad {
     position: absolute;
@@ -230,4 +236,10 @@ label {
     text-align: left;
     background-color: #84c0c6;
     color: white;
+}
+
+#insertTicketArrow {
+    position: absolute;
+    top: 45;
+    right: 0;
 }
