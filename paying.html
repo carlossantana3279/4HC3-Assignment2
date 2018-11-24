@@ -49,7 +49,6 @@
             });
 
             function enterCreditCard(){
-                document.getElementById("enterManually").style.display = "none";
                 document.getElementById("numberPad").style.display = "block";
                 document.getElementById("creditCardNumbers").style.display = "block";
                 document.getElementById("textInfo").style.display = "block";
@@ -100,6 +99,8 @@
             if (parent.globalState.paymentMethod === "credit"){
                 $("#tapArrow").css('display', 'block');
                 $("#insertCardArrow").css('display', 'block');  
+                document.getElementById("enterManually").style.display = "block";
+
                 tapEvents.push({
                     id: "tap-credit",
                     cb: function() {
@@ -219,7 +220,7 @@
                 background-color: grey;            
             }
 
-            #creditCardNumbers {
+            #creditCardNumbers, #enterManually {
                 display: none;
                 margin: auto;
             }

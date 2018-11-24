@@ -51,7 +51,23 @@
                 setTimeout(function(){ location.href = "./thankyou.html";}, 2000);
             }
             
-            parent.globalState.printReceipt("<hr> <h1>Test </h1> <hr>");
+            var receiptMessage = "Parking Meter Receipt<br>";
+            var time = parent.globalState.hours + "h," + parent.globalState.minutes + "min";
+            for (i=1; i <= parent.globalState.spots; i++){
+                var cost = 
+                receiptMessage += "Spot " + i + ": <br> " + time + "*$6/h=$" + parent.globalState.singleParkingSpotCost;
+                receiptMessage += "<br>"
+
+                if(parent.globalState.electricSpots[i-1] === 1){
+                        receiptMessage += "Spot " + i + " Charging: " + time + "*$1/h=$" + Math.round((+parent.globalState.hours + +parent.globalState.minutes*0.01666) * 100 ) / 100;
+                        receiptMessage += "<br>"
+                }
+
+                // + Math.round((+parent.globalState.hours + +parent.globalState.minutes*0.01666) * 100 ) / 100
+            }
+            receiptMessage  += " <hr> Total: " + parent.globalState.cost;
+
+            parent.globalState.printReceipt(receiptMessage);
 
             function printTicket(message){
                 alert(message);
